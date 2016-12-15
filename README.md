@@ -1,4 +1,4 @@
-# vue-linkify
+# vue-linkify [![Build Status](https://travis-ci.org/phanan/vue-linkify.svg?branch=master)](https://travis-ci.org/phanan/vue-linkify)
 
 > A simple Vue directive to turn URL's and emails into clickable links. Based on SoapBox's [Linkify](https://github.com/SoapBox/linkifyjs).
 
