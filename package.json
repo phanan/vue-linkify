@@ -2,7 +2,7 @@
   "name": "vue-linkify",
   "version": "1.0.0",
   "description": "A simple Vue directive to turn URL's and emails into clickable links",
-  "main": "index.js",
+  "main": "dist/vue-linkify.min.js",
   "scripts": {
     "lint": "./node_modules/.bin/eslint index.js",
     "build": "./node_modules/.bin/eslint index.js && BABEL_ENV=production && babel index.js -o ./dist/vue-linkify.min.js",
