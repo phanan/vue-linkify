@@ -2,8 +2,21 @@
 import linkify from 'linkifyjs/html'
 
 (function () {
-  function install (el, binding) {
-    el.innerHTML = linkify(el.innerHTML, binding.value)
+  function surround (tagName, content) {
+    return `<${tagName}>${content}</${tagName}>`
+  }
+
+  function traverse (vnode, binding) {
+    const { text, tag, children } = vnode
+    if (text) return linkify(text, binding)
+    if (children) {
+      const content = children.map(childVNode => traverse(childVNode, binding)).join('')
+      return surround(tag, content)
+    }
+  }
+
+  function install (el, binding, vnode) {
+    el.innerHTML = traverse(vnode, binding)
   }
 
   if (typeof exports === 'object') {
