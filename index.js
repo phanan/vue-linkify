@@ -6,11 +6,12 @@ import linkify from 'linkifyjs/html'
     return `<${tagName}>${content}</${tagName}>`
   }
 
-  function traverse (vnode, opts) {
+  function traverse (vnode, opts, isParent) {
     const { text, tag, children } = vnode
     if (text) return linkify(text, opts)
     if (children) {
-      const content = children.map(childVNode => traverse(childVNode, opts)).join('')
+      const content = children.map(childVNode => traverse(childVNode, opts, false)).join('')
+      if (isParent) return content
       return surround(tag, content)
     }
   }
@@ -21,7 +22,8 @@ import linkify from 'linkifyjs/html'
       el.innerHTML = linkify(el.innerHTML, binding.value)
     } else {
       // when `{{}}` syntax is used
-      el.innerHTML = traverse(vnode, binding.value)
+      const isParent = true
+      el.innerHTML = traverse(vnode, binding.value, isParent)
     }
   }
 

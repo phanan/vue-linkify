@@ -36,7 +36,7 @@ describe('vue-linkify', () => {
     }).$mount()
 
     expect(vm.$el.innerHTML).to.be
-      .equal('<h>Site url: <a href="https://vuejs.org" class="linkified" target="_blank">https://vuejs.org</a></h>')
+      .equal('Site url: <a href="https://vuejs.org" class="linkified" target="_blank">https://vuejs.org</a>')
   })
 
   it('should correctly linkify content with {{}} syntax and options', () => {
@@ -49,7 +49,7 @@ describe('vue-linkify', () => {
     }).$mount()
 
     expect(vm.$el.innerHTML).to.be
-      .equal('<h>Site url: <a href="https://vuejs.org" class="foo" target="_blank">https://vuejs.org</a></h>')
+      .equal('Site url: <a href="https://vuejs.org" class="foo" target="_blank">https://vuejs.org</a>')
   })
 
   it('should correctly linkify content with {{}} even after update', () => {
@@ -64,7 +64,7 @@ describe('vue-linkify', () => {
     vm.msg = 'https://reactjs.org'
     Vue.nextTick(() => {
       expect(vm.$el.innerHTML).to.be
-        .equal('<h>Site url: <a href="https://reactjs.org" class="linkified" target="_blank">https://reactjs.org</a></h>')
+        .equal('Site url: <a href="https://reactjs.org" class="linkified" target="_blank">https://reactjs.org</a>')
     })
   })
 })
