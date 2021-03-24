@@ -2,8 +2,29 @@
 import linkify from 'linkifyjs/html'
 
 (function () {
-  function install (el, binding) {
-    el.innerHTML = linkify(el.innerHTML, binding.value)
+  function surround (tagName, content) {
+    return `<${tagName}>${content}</${tagName}>`
+  }
+
+  function traverse (vnode, opts, isParent) {
+    const { text, tag, children } = vnode
+    if (text) return linkify(text, opts)
+    if (children) {
+      const content = children.map(childVNode => traverse(childVNode, opts, false)).join('')
+      if (isParent) return content
+      return surround(tag, content)
+    }
+  }
+
+  function install (el, binding, vnode) {
+    if (vnode.data.domProps && vnode.data.domProps.innerHTML) {
+      // when v-html is used
+      el.innerHTML = linkify(el.innerHTML, binding.value)
+    } else {
+      // when `{{}}` syntax is used
+      const isParent = true
+      el.innerHTML = traverse(vnode, binding.value, isParent)
+    }
   }
 
   if (typeof exports === 'object') {

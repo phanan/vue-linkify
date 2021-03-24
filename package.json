@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint index.js",
     "build": "./node_modules/.bin/eslint index.js && BABEL_ENV=production && babel index.js -o ./dist/vue-linkify.min.js",
-    "test": "npm build && karma start test/unit/karma.conf.js --single-run"
+    "test": "npm run build && karma start test/unit/karma.conf.js --single-run"
   },
   "keywords": [
     "vue",
